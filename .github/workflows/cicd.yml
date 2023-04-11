@@ -8,10 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Extract Version Test
+        id: version_step_test
+        run: |
+          echo "count=5" >> $GITHUB_OUTPUT
+      - name: Get Outputs
+        run: |
+          echo "The count was ${{ steps.version_step_test.outputs.count }}"
       - name: Run Unit Tests
         run: |
           echo "${{github.ref}}"
-          echo "${{GITHUB_RUNNER_VERSION}}"
           go test
   deploy:
     runs-on: ubuntu-latest
