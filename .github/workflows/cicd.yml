@@ -47,6 +47,7 @@ jobs:
         run: |
           echo VERSION_TAG=$(echo ${{ steps.version_step.outputs.version_tag }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
           echo LASTEST_TAG=$(echo ${{ steps.version_step.outputs.latest_tag  }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+          echo "${{env.VERSION_TAG}} 999"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v4
