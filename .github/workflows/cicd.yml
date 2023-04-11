@@ -6,7 +6,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run Unit Tests
-        run: go test
+        run: |
+          echo ${ github.ref }
+          go test
 
   deploy:
     runs-on: ubuntu-latest
