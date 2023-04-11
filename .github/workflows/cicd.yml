@@ -61,5 +61,3 @@ jobs:
           tags: |
             ${{env.VERSION_TAG}}
             ${{env.LASTEST_TAG}}
-          build-args: |
-            ${{steps.version_step.outputs.version}}
