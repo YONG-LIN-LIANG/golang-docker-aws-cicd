@@ -55,9 +55,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./Dockerfile
           push: true
           tags: |
             ${{env.VERSION_TAG}}
             ${{env.LASTEST_TAG}}
+          build-args: |
+            ${{steps.version_step.outputs.version}}
