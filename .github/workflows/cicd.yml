@@ -11,6 +11,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           echo "${{ github.ref }}"
+          echo "##[set-output name=version;]VERSION=${GITHUB_REF#$"refs/tags/v"}"
           go test
   deploy:
     runs-on: ubuntu-latest
