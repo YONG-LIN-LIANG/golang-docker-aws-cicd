@@ -13,6 +13,7 @@ jobs:
         run: |
           echo "Start test process..."
           echo "$GITHUB_REPOSITORY"
+          echo "$GITHUB_REF"
           go test
   deploy:
     runs-on: ubuntu-latest
