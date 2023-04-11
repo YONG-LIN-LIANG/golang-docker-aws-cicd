@@ -58,6 +58,7 @@ jobs:
         env:
           REPO: ci-test
         run: |
+          echo ls
           docker build -t $REPO ../
           docker tag $REPO:latest ${{ secrets.DOCKER_USERNAME }}/$REPO:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/$REPO
