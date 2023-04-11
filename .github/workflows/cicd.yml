@@ -49,12 +49,13 @@ jobs:
           echo LASTEST_TAG=$(echo ${{ steps.version_step.outputs.latest_tag  }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
 
       - name: Check Env
-        run: echo "${{env.VERSION_TAG}} 999"
+        run: echo "{{defaultContext}} 999"
 
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v4
         with:
+          context: "{{defaultContext}}:mysubdir"
           push: true
           tags: |
             ${{env.VERSION_TAG}}
