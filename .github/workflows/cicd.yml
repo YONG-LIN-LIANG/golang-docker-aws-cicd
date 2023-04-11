@@ -12,7 +12,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           echo "Start test process..."
-          echo "This repository is $GITHUB_REPOSITORY 666"
+          echo "This repository is $GITHUB_REPOSITORY"
           echo "$GITHUB_REF"
           go test
   deploy:
