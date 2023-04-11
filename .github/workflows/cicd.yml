@@ -50,17 +50,15 @@ jobs:
       #
       - name: Docker Login
         env:
-          DOCKER_USER: ${{ secrets.DOCKER_USERNAME}}
-          DOCKER_ACCESS_TOKEN: ${{ secrets.DOCKER_ACCESS_TOKEN }}
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Push
         env:
           REPO: ci-test
         run: |
           echo ls
-          docker build -t $REPO ../
-          docker tag $REPO:latest ${{ secrets.DOCKER_USERNAME }}/$REPO:latest
+          docker build -t golang-pipeline:latest .
+          docker tag golang-pipeline:latest ${{ secrets.DOCKER_USERNAME }}/$REPO:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/$REPO
 
       #- name: Check Env
