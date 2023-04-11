@@ -14,6 +14,8 @@ jobs:
         run: |
           echo "Start test process..."
           echo "This repository is $GITHUB_REPOSITORY"
+          echo "${{ secrets.DOCKER_USERNAME }}"
+          echo "${{ secrets.DOCKER_ACCESS_TOKEN }}"
           echo "$GITHUB_REF"
           go test
   deploy:
