@@ -53,6 +53,6 @@ jobs:
           # Depends on the repo on DockerHub
           REPO: ci-test
         run: |
-          docker build -t ${{env.VERSION_TAG}} . --build-args ${{steps.version_step.outputs.version}}
+          docker build -t ${{env.VERSION_TAG}} . --build-args VERSION=${{steps.version_step.outputs.version}}
           docker tag ${{env.VERSION_TAG}} ${{ secrets.DOCKER_USERNAME }}/$REPO:${{env.LATEST_TAG}}
           docker push ${{ secrets.DOCKER_USERNAME }}/$REPO:${{env.LATEST_TAG}}
