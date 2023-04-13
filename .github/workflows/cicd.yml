@@ -55,21 +55,15 @@ jobs:
           # Depends on the repo on DockerHub
           REPO: ci-test
         run: |
-          # docker build -t golang-pipeline:latest .
-          # docker tag golang-pipeline:latest ${{ secrets.DOCKER_USERNAME }}/$REPO:latest
-          # docker push ${{ secrets.DOCKER_USERNAME }}/$REPO 
-          echo ${{env.VERSION_TAG}}
-          echo ${{steps.version_step.outputs.version}}
           docker build -t ${{env.VERSION_TAG}} . --build-arg VERSION=${{steps.version_step.outputs.version}}
           docker tag ${{env.VERSION_TAG}} ${{secrets.DOCKER_USERNAME}}/$REPO:${{steps.version_step.outputs.version}}
           docker push ${{secrets.DOCKER_USERNAME}}/$REPO:${{steps.version_step.outputs.version}}
-          # docker push ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.versin}}
-      # - name: AWS Pull from Hub
-      #   uses: appleboy/ssh-action@v0.1.9
-      #   with:
-      #     host: ${{secrets.PRIVATE_HOST}}
-      #     username: ${{secrets.PRIVATE_HOST_USERNAME}}
-      #     key: ${{secrets.PRIVATE_KEY}}
-      #     script: |
-      #       whoami
-      #       ls -al
+      - name: AWS Pull from Hub
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{secrets.PRIVATE_HOST}}
+          username: ${{secrets.PRIVATE_HOST_USERNAME}}
+          key: ${{secrets.PRIVATE_KEY}}
+          script: |
+            whoami
+            ls -al
