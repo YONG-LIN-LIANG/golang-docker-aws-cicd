@@ -84,6 +84,6 @@ jobs:
             echo $VERSION
             echo ${{env.DOCKER_NAME}}
             docker pull ${{secrets.DOCKER_USERNAME}}/${{env.DOCKER_HUB_REPO}}:$VERSION
-            # docker rm -f $DOCKER_NAME
+            docker rm -f ${{env.DOCKER_NAME}}
             docker run -d --name ${{env.DOCKER_NAME}} ${{secrets.DOCKER_USERNAME}}/${{env.DOCKER_HUB_REPO}}:$VERSION
             # docker run -d --name golang-pipeline steven841221/ci-test:1.4.9
