@@ -65,11 +65,12 @@ jobs:
       - name: AWS Pull from Hub
         uses: appleboy/ssh-action@v0.1.9
         env:
-          REPO: $DOCKER_HUB_REPO
+          VERSION: ${{steps.version_step.outputs.version}}
         with:
           host: ${{secrets.PRIVATE_HOST}}
           username: ${{secrets.PRIVATE_HOST_USERNAME}}
           key: ${{secrets.PRIVATE_KEY}}
+          envs: VERSION
           script: |
             whoami
             ls -al
@@ -79,8 +80,9 @@ jobs:
             echo ${{secrets.DOCKER_USERNAME}}
             echo $DOCKER_NAME
             echo ${{env.DOCKER_NAME}} 
-            # docker pull steven841221/ci-test:1.4.9
-            # docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
+            echo ${{steps.version_step.outputs.version}}
+            echo $VERSION
+            # docker pull ${{secrets.DOCKER_USERNAME}}/${{env.DOCKER_HUB_REPO}}:${{steps.version_step.outputs.version}}
             # docker rm -f $DOCKER_NAME
             # docker run -d --name $DOCKER_NAME ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
             # docker run -d --name golang-pipeline steven841221/ci-test:1.4.9
