@@ -62,6 +62,7 @@ jobs:
           echo ${{steps.version_step.outputs.version}}
           docker build -t ${{env.VERSION_TAG}} . --build-arg VERSION=${{steps.version_step.outputs.version}}
           docker tag ${{env.VERSION_TAG}} ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.version}}
+          docker push ${{ secrets.DOCKER_USERNAME }}/$REPO
           # docker push ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.versin}}
       # - name: AWS Pull from Hub
       #   uses: appleboy/ssh-action@v0.1.9
