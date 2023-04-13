@@ -70,12 +70,15 @@ jobs:
           host: ${{secrets.PRIVATE_HOST}}
           username: ${{secrets.PRIVATE_HOST_USERNAME}}
           key: ${{secrets.PRIVATE_KEY}}
-          envs: REPO
           script: |
             whoami
             ls -al
-            echo "This is $REPO"
+            echo "This is $DOCKER_HUB_REPO"
             echo ${{env.DOCKER_HUB_REPO}}
+            echo $DOCKER_HUB_REPO
+            echo ${{secrets.DOCKER_USERNAME}}
+            echo $DOCKER_NAME
+            echo ${{env.DOCKER_NAME}} 
             # docker pull steven841221/ci-test:1.4.9
             # docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
             # docker rm -f $DOCKER_NAME
