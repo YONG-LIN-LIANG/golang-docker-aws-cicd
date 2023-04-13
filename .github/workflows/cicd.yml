@@ -71,8 +71,10 @@ jobs:
           script: |
             whoami
             ls -al
-            docker pull steven841221/ci-test:1.4.9
+            echo $DOCKER_HUB_REPO
+            echo ${{env.DOCKER_HUB_REPO}}
+            # docker pull steven841221/ci-test:1.4.9
             # docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
             # docker rm -f $DOCKER_NAME
             # docker run -d --name $DOCKER_NAME ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
-            docker run -d --name golang-pipeline steven841221/ci-test:1.4.9
+            # docker run -d --name golang-pipeline steven841221/ci-test:1.4.9
