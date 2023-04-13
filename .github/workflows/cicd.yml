@@ -73,6 +73,5 @@ jobs:
             ls -al
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
-            docker stop $DOCKER_NAME
-            docker rm -f $DOCKER_NAME
-            docker -d --name $DOCKER_NAME ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
+            # docker rm -f $DOCKER_NAME
+            docker run -d --name $DOCKER_NAME ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
