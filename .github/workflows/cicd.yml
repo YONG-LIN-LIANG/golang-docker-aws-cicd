@@ -17,9 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run Unit Tests
         run: |
-          echo "Start test process..."
-          echo "This repository is $GITHUB_REPOSITORY"
-          echo "$GITHUB_REF"
+          echo $GITHUB_REF
           go test
   deploy:
     runs-on: ubuntu-latest
