@@ -29,10 +29,12 @@ jobs:
           echo "version=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
           echo "version_tag=$GITHUB_REPOSITORY:${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
           echo "latest_tag=$GITHUB_REPOSITORY:latest" >> $GITHUB_OUTPUT
+
       - name: Print Version
         run: |
           echo ${{ steps.version_step.outputs.version_tag }}
           echo ${{ steps.version_step.outputs.latest_tag }}
+
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
@@ -56,6 +58,7 @@ jobs:
           docker build -t ${{env.VERSION_TAG}} . --build-arg VERSION=${{steps.version_step.outputs.version}}
           docker tag ${{env.VERSION_TAG}} ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.version}}
           docker push ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.versin}}
+
       - name: AWS Pull from Hub
         uses: appleboy/ssh-action@v0.1.9
         with:
