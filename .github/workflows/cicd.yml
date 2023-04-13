@@ -64,14 +64,17 @@ jobs:
 
       - name: AWS Pull from Hub
         uses: appleboy/ssh-action@v0.1.9
+        env:
+          REPO: $DOCKER_HUB_REPO
         with:
           host: ${{secrets.PRIVATE_HOST}}
           username: ${{secrets.PRIVATE_HOST_USERNAME}}
           key: ${{secrets.PRIVATE_KEY}}
+          envs: REPO
           script: |
             whoami
             ls -al
-            echo $DOCKER_HUB_REPO
+            echo "This is $REPO"
             echo ${{env.DOCKER_HUB_REPO}}
             # docker pull steven841221/ci-test:1.4.9
             # docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
