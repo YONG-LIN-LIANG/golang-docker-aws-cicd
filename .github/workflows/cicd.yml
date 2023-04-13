@@ -61,8 +61,6 @@ jobs:
         with:
           host: ${{secrets.PRIVATE_HOST}}
           username: ${{secrets.PRIVATE_HOST_USERNAME}}
-          password: ${{secrets.PRIVATE.HOST_PASSWORD}}
-          passphrase: ${{secrets.PASSPHRASE}}
           key: ${{secrets.PRIVATE_KEY}}
           script: |
             whoami
