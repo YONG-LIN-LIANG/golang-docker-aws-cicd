@@ -59,12 +59,12 @@ jobs:
           docker tag ${{env.VERSION_TAG}} ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.version}}
           docker push ${{ secrets.DOCKER_USERNAME }}/$REPO:${{steps.version_step.outputs.versin}}
 
-      - name: AWS Pull from Hub
-        uses: appleboy/ssh-action@v0.1.9
-        with:
-          host: ${{secrets.PRIVATE_HOST}}
-          username: ${{secrets.PRIVATE_HOST_USERNAME}}
-          key: ${{secrets.PRIVATE_KEY}}
-          script: |
-            whoami
-            ls -al
+      # - name: AWS Pull from Hub
+      #   uses: appleboy/ssh-action@v0.1.9
+      #   with:
+      #     host: ${{secrets.PRIVATE_HOST}}
+      #     username: ${{secrets.PRIVATE_HOST_USERNAME}}
+      #     key: ${{secrets.PRIVATE_KEY}}
+      #     script: |
+      #       whoami
+      #       ls -al
