@@ -5,6 +5,11 @@ on:
       - feature_infra
     tags:
       - "*"
+env:
+  # Depends on the repo on DockerHub
+  DOCKER_HUB_REPO: ci-test
+  DOCKER_NAME: golang-pipeline
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -51,13 +56,12 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Push
-        env:
-          # Depends on the repo on DockerHub
-          REPO: ci-test
         run: |
+          echo $VERSION_TAG
           docker build -t ${{env.VERSION_TAG}} . --build-arg VERSION=${{steps.version_step.outputs.version}}
-          docker tag ${{env.VERSION_TAG}} ${{secrets.DOCKER_USERNAME}}/$REPO:${{steps.version_step.outputs.version}}
-          docker push ${{secrets.DOCKER_USERNAME}}/$REPO:${{steps.version_step.outputs.version}}
+          docker tag ${{env.VERSION_TAG}} ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
+          docker push ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
+
       - name: AWS Pull from Hub
         uses: appleboy/ssh-action@v0.1.9
         with:
@@ -67,3 +71,8 @@ jobs:
           script: |
             whoami
             ls -al
+            docker login
+            docker pull ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
+            docker stop $DOCKER_NAME
+            docker rm -f $DOCKER_NAME
+            docker -d --name $DOCKER_NAME ${{secrets.DOCKER_USERNAME}}/$DOCKER_HUB_REPO:${{steps.version_step.outputs.version}}
