@@ -18,6 +18,7 @@ jobs:
       - name: Run Unit Tests
         run: |
           echo $GITHUB_REF
+          echo ${{ github.head_ref }}
           go test
   deploy:
     runs-on: ubuntu-latest
