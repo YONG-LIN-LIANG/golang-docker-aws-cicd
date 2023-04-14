@@ -8,8 +8,8 @@ on:
 env:
   # Depends on the repo on DockerHub
   CURRENT_VERSION: 1.8.7
-  DOCKER_HUB_REPO:ci-testDEFAULT
-  DOCKER_NAME:golang-pipelineDEFAULT
+  DOCKER_HUB_REPO:ci-test"DEFAULT"
+  DOCKER_NAME:golang-pipeline"DEFAULT"
 
 jobs:
   test:
