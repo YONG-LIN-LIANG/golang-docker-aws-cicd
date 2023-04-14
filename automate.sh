@@ -1,7 +1,7 @@
 #! /bin/bash
 branch=$(git symbolic-ref --short HEAD)
-docker_hub_repo=ci-test
-docker_name=golang-pipeline
+docker_hub_repo=myreponame
+docker_name=mydockername
 
 echo "You are currently at branch of $branch"
 sed -i '' "s/CURRENT_VERSION: *.*.*/CURRENT_VERSION: $1/g" ./.github/workflows/cicd.yml
