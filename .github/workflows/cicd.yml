@@ -7,7 +7,7 @@ on:
       - "*"
 env:
   # Depends on the repo on DockerHub
-  CURRENT_VERSION: 2.0.1
+  CURRENT_VERSION: 2.0.4
   DOCKER_HUB_REPO: ci-test
   DOCKER_NAME: golang-pipeline
 
